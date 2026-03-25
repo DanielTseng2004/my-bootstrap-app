@@ -1,0 +1,105 @@
+/* --- 1. 定義 Google Gemini 柔和風格變數 --- */
+:root {
+  --bg-main: #f8f9fa;
+  --bg-card: #ffffff;
+  --text-main: #202124;
+  --text-muted: #5f6368;
+  --border-color: #eeeeee;
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --google-blue: #1a73e8;
+  --google-gradient: linear-gradient(90deg, #4285F4, #9B72CB, #D96570);
+}
+
+[data-theme='dark'] {
+  --bg-main: #202124;
+  --bg-card: #2d2e30;
+  --text-main: #f1f3f4;
+  /* 極亮白 */
+  --text-muted: #bdc1c6;
+  --border-color: #3c4043;
+  --nav-bg: rgba(32, 33, 36, 0.9);
+  --google-blue: #8ab4f8;
+}
+
+/* --- 2. 全域基礎修正 --- */
+body,
+html,
+#app {
+  background-color: var(--bg-main) !important;
+  color: var(--text-main) !important;
+  transition: all 0.3s ease;
+  min-height: 100vh;
+}
+
+/* --- 3. 強制覆蓋 Bootstrap --- */
+.card,
+.bg-white,
+.list-group-item,
+.modal-content {
+  background-color: var(--bg-card) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* 確保所有標題在深色模式下跟隨主題色 */
+[data-theme='dark'] h1,
+[data-theme='dark'] h2,
+[data-theme='dark'] h3,
+[data-theme='dark'] h4,
+[data-theme='dark'] h5,
+[data-theme='dark'] h6,
+[data-theme='dark'] .fw-bold {
+  color: #ffffff !important;
+}
+
+/* --- 4. 針對「頂尖企業合作」區塊的強力修正 --- */
+
+/* 強制將該區域內所有文字與圖標設為白色 */
+[data-theme='dark'] .company-logos,
+[data-theme='dark'] .company-logos div,
+[data-theme='dark'] .company-logos h3,
+[data-theme='dark'] .company-logos i {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* 針對 Bootstrap Icons 的微調，增加清晰度 */
+[data-theme='dark'] .company-logos i.bi {
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.5));
+}
+
+/* --- 5. 其他截圖細節優化 --- */
+
+/* 修正統計數字顏色 */
+.stat-value {
+  color: var(--google-blue) !important;
+}
+
+[data-theme='dark'] .stat-value {
+  color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(138, 180, 248, 0.4);
+}
+
+/* 修正圖片與 Logo 在深色模式下的亮度 */
+[data-theme='dark'] img {
+  filter: brightness(0.8) contrast(1.2);
+}
+
+/* 導覽列優化 */
+.navbar {
+  background-color: var(--nav-bg) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* 列表動畫 */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.4s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
