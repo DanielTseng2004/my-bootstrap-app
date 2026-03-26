@@ -1,7 +1,6 @@
 <template>
   <div class="jobs-page min-vh-100">
-
-    <div class="search-header py-5 shadow-sm sticky-top" style="top: 70px; z-index: 100;">
+    <div class="search-header py-3 shadow-sm sticky-top" style="top: 10px; z-index: 100;">
       <div class="container text-center">
         <div class="col-md-8 mx-auto">
           <div class="input-group input-group-lg shadow-sm rounded-pill overflow-hidden border">
@@ -18,20 +17,24 @@
     <div class="container py-5">
       <div class="row g-4">
         <div class="col-lg-3 position-relative" style="z-index: 20;">
-          <SideBar @filter="handleFilter" />
+          <SideBar :external-search="searchQuery" @update-results="handleUpdateResults" />
         </div>
 
         <div class="col-lg-9" style="z-index: 10;">
+          <div class="d-flex justify-content-between align-items-center mb-4 px-2">
+            <h5 class="fw-bold mb-0">共找到 {{ filteredJobs.length }} 個機會</h5>
+          </div>
+
           <TransitionGroup name="list">
             <JobCard v-for="job in filteredJobs" :key="job.id" :job="job" />
           </TransitionGroup>
 
-          <div v-if="filteredJobs.length === 0" class="text-center py-5">
+          <div v-if="filteredJobs.length === 0" class="text-center py-5 mt-4">
             <div class="mb-3">
               <i class="bi bi-search text-muted" style="font-size: 3rem; opacity: 0.3;"></i>
             </div>
-            <h5 class="text-muted">找不到符合關鍵字的職缺</h5>
-            <p class="text-muted small">嘗試調整搜尋條件或清除篩選</p>
+            <h5 class="text-muted fw-bold">找不到符合條件的職缺</h5>
+            <p class="text-muted small">請嘗試調整左側篩選條件或搜尋關鍵字</p>
           </div>
         </div>
       </div>
@@ -40,55 +43,21 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import SideBar from '../components/SideBar.vue'
 import JobCard from '../components/JobCard.vue'
-import { jobs } from '../data/jobs.js'
 
+// 1. 頂部搜尋框的字串
 const searchQuery = ref('')
-const activeFilters = ref({
-  fullTime: true, // 預設顯示，需配合 Sidebar 邏輯
-  remote: false,
-  contract: false,
-  salary: 0
-})
 
-const filteredJobs = computed(() => {
-  return jobs.filter(job => {
-    // 1. 關鍵字搜尋
-    const matchQuery =
-      job.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      job.company.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      job.tags.some(tag => tag.toLowerCase().includes(searchQuery.value.toLowerCase()));
+// 2. 存放從 Sidebar 傳過來的「最終過濾結果」
+const filteredJobs = ref([])
 
-    if (!matchQuery) return false;
-
-    // 2. 側邊欄篩選
-    // 薪資篩選 (簡單邏輯：職缺最低薪資 >= 篩選薪資)
-    const salaryLimits = { 0: 0, 1: 50, 2: 80, 3: 100 };
-    const minSalaryReq = salaryLimits[activeFilters.value.salary] || 0;
-    if (job.minSalary < minSalaryReq) return false;
-
-    // 類型篩選 (如果使用者有勾選任何類型，則只顯示符合的；若全沒勾則顯示所有 或 預設顯示 Full-time)
-    // 這裡實作：如果有勾選特定條件，必須符合其中之一
-    const showFullTime = activeFilters.value.fullTime;
-    const showRemote = activeFilters.value.remote;
-    const showContract = activeFilters.value.contract;
-
-    // 如果篩選器有勾選，檢查是否符合
-    if (showRemote && !job.isRemote) return false;
-    if (showContract && job.type !== 'Contract') return false;
-    // 注意：實際邏輯視需求而定，這裡示範簡單的過濾
-
-    return true;
-  })
-})
-
-const handleFilter = (filters) => {
-  activeFilters.value = filters;
+// 3. 接收 Sidebar 算好的結果
+const handleUpdateResults = (results) => {
+  filteredJobs.value = results
 }
 </script>
-
 <style scoped>
 /* JobsView.vue */
 .jobs-page {

@@ -1,17 +1,16 @@
 <template>
-  <div class="register-page min-vh-100 d-flex align-items-center justify-content-center py-5">
+  <div class="register-page min-vh-100 d-flex align-items-center py-5">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-5 col-lg-4">
-          <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
-            <div class="card-body p-4 p-md-5">
+        <div class="col-md-5">
+          <div class="card border-0 shadow-lg rounded-5 overflow-hidden">
+            <div class="card-body p-5">
 
-              <div class="text-center mb-4">
+              <div class="text-center mb-5">
                 <router-link to="/" class="navbar-brand fw-bold fs-2 gradient-text text-decoration-none">
                   Job Finder
                 </router-link>
                 <h4 class="fw-bold mt-3 mb-1">建立新帳號</h4>
-                <p class="text-muted small">加入我們，開啟你的職涯新篇章</p>
               </div>
 
               <form @submit.prevent="handleRegister">
@@ -43,7 +42,7 @@
 
               <div class="d-flex align-items-center my-4">
                 <hr class="flex-grow-1 border-color">
-                <span class="mx-3 text-muted small">已有帳號？</span>
+                <span class="ms-1 text-decoration-none">已有帳號？</span>
                 <hr class="flex-grow-1 border-color">
               </div>
 

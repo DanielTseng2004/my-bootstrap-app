@@ -3,9 +3,10 @@
     <header class="py-5 position-relative hero-header">
       <div class="glow-sphere glow-1"></div>
       <div class="glow-sphere glow-2"></div>
-
       <div class="container py-5 position-relative" style="z-index: 1;">
+        <!-- 橫排 -->
         <div class="row align-items-center">
+          <!-- 左半邊 -->
           <div class="col-lg-7">
             <h1 class="display-3 fw-bold mb-4 tracking-tight">
               智慧配對，<br>
@@ -19,12 +20,13 @@
                 style="background: var(--google-blue);">
                 立即探索
               </router-link>
-              <button class="btn btn-outline-custom btn-lg rounded-pill px-5 border-2">
+              <router-link to="/jobs" class="btn btn-outline-primary btn-lg rounded-pill px-5 shadow-lg border-0"
+                style="background: var(--google-white);">
                 人才招聘
-              </button>
+              </router-link>
             </div>
           </div>
-
+          <!-- 右半邊 -->
           <div class="col-lg-5 text-center d-none d-lg-block">
             <div class="ai-recommend-card p-5 shadow-lg rounded-5">
               <i class="bi bi-stars fs-1 gradient-text"></i>
@@ -35,9 +37,10 @@
         </div>
       </div>
     </header>
-
+    <!-- 分類section -->
     <section class="container py-5">
       <h3 class="fw-bold mb-5">探索熱門分類</h3>
+      <!-- 橫排 -->
       <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-4">
         <CategoryCard v-for="c in categories" :key="c.title" :title="c.title" :icon="c.icon" />
       </div>
@@ -46,7 +49,7 @@
     <section class="container mb-5">
       <div class="row g-4">
         <div class="col-md-6">
-          <div class="status-card p-5 rounded-4 d-flex align-items-center h-100">
+          <div class="status-card p-5 rounded-4 d-flex align-items-center h-100 border-start border-4 border-primary">
             <i class="bi bi-archive fs-1 text-primary me-4"></i>
             <div>
               <h4 class="fw-bold">最近新增職缺</h4>

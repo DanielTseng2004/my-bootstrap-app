@@ -6,12 +6,10 @@
           <div class="card border-0 shadow-lg rounded-5 overflow-hidden">
             <div class="card-body p-5">
               <div class="text-center mb-5">
-                <h2 class="fw-bold mb-2">
-                  <span>歡迎回來</span>
-                </h2>
-                <p class="text-muted small">
-                  登入您的帳號以探索更多職缺
-                </p>
+                <router-link to="/" class="navbar-brand fw-bold fs-2 gradient-text text-decoration-none">
+                  Job Finder
+                </router-link>
+                <h4 class="fw-bold mt-3 mb-1">歡迎回來</h4>
               </div>
 
               <!-- 錯誤訊息提示區塊 -->
@@ -69,7 +67,7 @@
               </div>
 
               <div class="text-center">
-                <span class="text-muted small">還沒有帳號？</span>
+                <span class="text-decoration-none ms-1">還沒有帳號？</span>
                 <router-link to="/register" class="btn btn-link btn-sm fw-bold text-decoration-none ms-1">
                   立即註冊
                 </router-link>
