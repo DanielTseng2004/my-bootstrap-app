@@ -1,5 +1,9 @@
 <template>
   <div class="home-page overflow-hidden">
+    <div class="p-4">
+      <el-button type="primary">這是自動引入的按鈕</el-button>
+      <el-date-picker v-model="value" type="date" placeholder="選個日期" />
+    </div>
     <header class="py-5 position-relative hero-header">
       <div class="glow-sphere glow-1"></div>
       <div class="glow-sphere glow-2"></div>
@@ -113,7 +117,8 @@
 
 <script setup>
 import CategoryCard from '../components/CategoryCard.vue'
-
+import { ref } from 'vue'
+const value = ref('')
 const categories = [
   { title: 'Accounting', icon: 'bi-briefcase' },
   { title: 'Marketing', icon: 'bi-megaphone' },

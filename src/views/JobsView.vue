@@ -47,54 +47,45 @@ import { ref } from 'vue'
 import SideBar from '../components/SideBar.vue'
 import JobCard from '../components/JobCard.vue'
 
-// 1. 頂部搜尋框的字串
 const searchQuery = ref('')
 
-// 2. 存放從 Sidebar 傳過來的「最終過濾結果」
 const filteredJobs = ref([])
 
-// 3. 接收 Sidebar 算好的結果
 const handleUpdateResults = (results) => {
   filteredJobs.value = results
 }
 </script>
+
 <style scoped>
-/* JobsView.vue */
 .jobs-page {
-  /* 強制套用 app.css 定義的背景變數 */
   background-color: var(--bg-main) !important;
   min-height: 100vh;
   transition: background-color 0.3s ease;
 }
 
-/* 確保搜尋列在滾動時不會因為透明度看到下方的白色 */
 .search-header {
   background-color: var(--nav-bg) !important;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-color);
 }
 
-/* 搜尋圖示背景 */
 .custom-search-icon {
   background-color: var(--bg-card) !important;
   color: var(--google-blue);
   padding-left: 1.5rem;
 }
 
-/* 搜尋輸入框 */
 .custom-search-input {
   background-color: var(--bg-card) !important;
   color: var(--text-main) !important;
   font-size: 1rem;
 }
 
-/* 輸入框 Placeholder 顏色 */
 .custom-search-input::placeholder {
   color: var(--text-muted);
   opacity: 0.6;
 }
 
-/* 列表動畫 */
 .list-enter-active,
 .list-leave-active {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
